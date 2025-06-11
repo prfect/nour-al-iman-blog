@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - {% endif %}نور الإيمان</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+    <button class="language-toggle">English / العربية</button>
+    
+    <header>
+        <h1 class="site-title">نور الإيمان</h1>
+        <p class="site-subtitle">رحلة روحانية في عالم متغير، لحظات من التأمل والإيمان في الحياة اليومية</p>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="/">الرئيسية</a></li>
+            {% for category in collections.categoryPosts | keys %}
+            <li><a href="/category/{{ category | slug }}/">{{ category }}</a></li>
+            {% endfor %}
+            <li><a href="/about/">من نحن</a></li>
+            <li><a href="/contact/">تواصل معنا</a></li>
+        </ul>
+    </nav>
+    
+    <div class="accessibility-controls">
+        <div class="font-size-controls">
+            <span>حجم الخط: </span>
+            <button class="font-size-small">أ-</button>
+            <button class="font-size-medium">أ</button>
+            <button class="font-size-large">أ+</button>
+        </div>
+        <div class="dark-mode-toggle">
+            <span>الوضع الليلي:</span>
+            <label class="switch">
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <main>
+        {{ content | safe }}
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>نور الإيمان</h3>
+                <p>مدونة إسلامية تهدف إلى نشر الوعي الديني والثقافي بين النساء المغربيات، ومشاركة التجارب الشخصية والتأملات الروحية في إطار الحياة العصرية.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-nav">
+                <h4 class="footer-nav-title">روابط سريعة</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="/">الرئيسية</a></li>
+                    <li><a href="/about/">من نحن</a></li>
+                    <li><a href="/posts/">المقالات</a></li>
+                    <li><a href="/contact/">اتصل بنا</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-nav">
+                <h4 class="footer-nav-title">مواضيع شائعة</h4>
+                <ul class="footer-nav-list">
+                    <li><a href="/category/القرآن-الكريم/">العبادات</a></li>
+                    <li><a href="/category/المرأة-في-الإسلام/">الأسرة المسلمة</a></li>
+                    <li><a href="/category/قصص-الصحابيات/">السيرة النبوية</a></li>
+                    <li><a href="/category/الطبخ-المغربي/">الطبخ المغربي</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="copyright">جميع الحقوق محفوظة © نور الإيمان {% year %} | تم التصميم بكل حب للمرأة المغربية المسلمة</p>
+        </div>
+    </footer>
+
+    <script src="/js/scripts.js"></script>
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
