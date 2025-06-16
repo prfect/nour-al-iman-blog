@@ -2,131 +2,95 @@
 layout: base.njk
 ---
 
-<div class="featured-slideshow">
-    <div class="featured-slide" style="display: block;">
-        <h2 class="featured-title">أهلاً بكم في نور الإيمان</h2>
-        <p class="featured-text">منصة إسلامية تجمع بين الأصالة والمعاصرة، نسعى لتقديم محتوى هادف يناسب المرأة المغربية المسلمة ويساعدها على مواجهة تحديات الحياة العصرية من منظور إسلامي.</p>
-        <a href="/about/" class="read-more">تعرفي علينا أكثر <i class="fas fa-arrow-left"></i></a>
-    </div>
-    <div class="featured-slide">
-        <h2 class="featured-title">سلسلة تفسير القرآن الكريم</h2>
-        <p class="featured-text">انضمي إلينا في رحلة تفسير سور القرآن الكريم بأسلوب ميسر يناسب المرأة المعاصرة، مع التركيز على استخلاص الدروس والعبر التي تساعدنا في حياتنا اليومية.</p>
-        <a href="/category/القرآن-الكريم/" class="read-more">اقرئي المزيد <i class="fas fa-arrow-left"></i></a>
-    </div>
-    <div class="featured-slide">
-        <h2 class="featured-title">دورة الطبخ المغربي الصحي</h2>
-        <p class="featured-text">شاركي معنا في دورة تعليمية لإعداد أشهى الأطباق المغربية التقليدية بطرق صحية تحافظ على قيمتها الغذائية وتناسب احتياجات الأسرة العصرية.</p>
-        <a href="/category/الطبخ-المغربي/" class="read-more">سجلي الآن <i class="fas fa-arrow-left"></i></a>
-    </div>
-    <div class="slide-indicators">
-        <span class="slide-indicator active"></span>
-        <span class="slide-indicator"></span>
-        <span class="slide-indicator"></span>
-    </div>
-</div>
+<section class="hero">
+  <div class="container">
+    <h1>نور الإيمان</h1>
+    <p class="subtitle">رحلة روحانية في عالم متغير</p>
+    <a href="/articles/" class="cta-button">تصفح المقالات</a>
+  </div>
+</section>
 
-<div class="article-container">
-    {% for post in collections.posts | reverse %}
-    {% if loop.index <= 6 %}
-    <article>
-        <span class="article-category">{{ post.data.category }}</span>
-        <div class="article-image-container">
-            <img src="{{ post.data.thumbnail }}" alt="{{ post.data.title }}" class="article-image">
-        </div>
-        <div class="article-content">
-            <div class="article-decoration"></div>
-            <h2 class="article-title">{{ post.data.title }}</h2>
-            <div class="article-meta">
-                <div class="article-author">
-                    <img src="/images/avatar.jpg" alt="{{ post.data.author }}" class="author-avatar">
-                    <span>{{ post.data.author }}</span>
-                </div>
-                <span>{{ post.date | formatDate }}</span>
-            </div>
-            <p class="article-excerpt">
-                {% if post.data.excerpt %}
-                    {{ post.data.excerpt }}
-                {% else %}
-                    {{ post.templateContent | striptags | truncate(200) }}
-                {% endif %}
-            </p>
-            <a href="{{ post.url }}" class="read-more">قراءة المزيد</a>
-        </div>
-    </article>
+<section class="featured-posts">
+  <div class="container">
+    <h2 class="section-title">أحدث المقالات</h2>
     
-    {% if loop.index == 2 %}
-    <div class="calligraphy-decoration">بسم الله الرحمن الرحيم</div>
-    {% endif %}
-    
-    {% if loop.index == 4 %}
-    <div class="ornament">
-        <div class="ornament-center"></div>
-    </div>
-    {% endif %}
-    
-    {% endif %}
-    {% endfor %}
-</div>
-
-<aside>
-    <div class="sidebar-section">
-        <h3 class="sidebar-title">ابحث في المدونة</h3>
-        <form class="search-form" action="/search/" method="get">
-            <input type="text" placeholder="ابحث هنا..." name="q" class="search-input">
-            <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-        </form>
-    </div>
-    
-    <div class="hijri-date-display">
-        <i class="fas fa-moon"></i> اليوم: <span class="hijri-date">15 ذو القعدة 1446 هـ</span>
-    </div>
-    
-    <div class="prayer-times-widget">
-        <h3 class="prayer-times-title"><i class="fas fa-mosque"></i> مواقيت الصلاة في وجدة</h3>
-        <div class="prayer-times">
-            <!-- Prayer times will be loaded by JavaScript -->
-        </div>
-    </div>
-    
-    <div class="sidebar-section">
-        <h3 class="sidebar-title">التصنيفات</h3>
-        <ul class="category-list">
-            {% for category, posts in collections.categoryPosts %}
-            <li><a href="/category/{{ category | slug }}/">{{ category }} ({{ posts.length }})</a></li>
-            {% endfor %}
-        </ul>
-    </div>
-    
-    <div class="sidebar-section">
-        <h3 class="sidebar-title">المقالات الأكثر قراءة</h3>
-        <ul class="popular-posts">
-            {% for post in collections.posts | reverse %}
-            {% if loop.index <= 5 %}
-            <li><a href="{{ post.url }}">{{ post.data.title }}</a></li>
+    <div class="posts-grid">
+      {% if collections.posts.length > 0 %}
+        {% for post in collections.posts | reverse | limit(3) %}
+          <div class="post-card reveal">
+            {% if post.data.thumbnail %}
+              <div class="thumbnail">
+                <img src="{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+              </div>
             {% endif %}
-            {% endfor %}
-        </ul>
+            
+            <div class="content">
+              {% if post.data.category %}
+                <div class="category">{{ post.data.category }}</div>
+              {% endif %}
+              
+              <h3 class="title">
+                <a href="{{ post.url }}">{{ post.data.title }}</a>
+              </h3>
+              
+              {% if post.data.excerpt %}
+                <p class="excerpt">{{ post.data.excerpt }}</p>
+              {% endif %}
+              
+              <div class="meta">
+                <span class="date">{{ post.date | formatDate }}</span>
+                {% if post.data.author %}
+                  <span class="author">{{ post.data.author }}</span>
+                {% endif %}
+              </div>
+              
+              <a href="{{ post.url }}" class="read-more">اقرأ المزيد →</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="no-posts">
+          <p>لا توجد مقالات بعد. ترقبوا المزيد قريبًا!</p>
+        </div>
+      {% endif %}
     </div>
     
-    <div class="daily-hadith">
-        <h3>حديث اليوم</h3>
-        <blockquote>
-            <p>"الكلمة الطيبة صدقة، وكل معروف صدقة"</p>
-            <cite>- صحيح البخاري</cite>
-        </blockquote>
-    </div>
+    {% if collections.posts.length > 3 %}
+      <div class="view-all">
+        <a href="/articles/" class="cta-button">عرض جميع المقالات</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="hadith-section">
+  <div class="container">
+    <h2 class="section-title">حديث اليوم</h2>
     
-    <div class="quote-card">
-        <p class="quote-text">إن الدين عند الله الإسلام، وما اختلف الذين أوتوا الكتاب إلا من بعد ما جاءهم العلم بغيا بينهم.</p>
-        <p class="quote-author">- سورة آل عمران: 19</p>
+    <div class="hadith-card reveal">
+      <blockquote>
+        <p>{{ metadata.dailyHadith.text }}</p>
+        <cite>{{ metadata.dailyHadith.source }}</cite>
+      </blockquote>
     </div>
+  </div>
+</section>
+
+{% if collections.categories.length > 0 %}
+<section class="categories-section">
+  <div class="container">
+    <h2 class="section-title">تصفح حسب التصنيف</h2>
     
-    <div class="sidebar-section animate-fade-in">
-        <h3 class="sidebar-title">اشتركي في النشرة البريدية</h3>
-        <p style="margin-bottom: 1rem;">احصلي على آخر المقالات والتحديثات مباشرة على بريدك الإلكتروني</p>
-        <form class="newsletter-form" action="/subscribe/" method="post" netlify>
-            <input type="email" placeholder="أدخلي بريدك الإلكتروني" name="email" class="search-input" style="margin-bottom: 0.8rem;" required>
-            <button type="submit" class="read-more" style="width: 100%;">اشتراك <i class="fas fa-paper-plane"></i></button>
-        </form>
+    <div class="categories-grid">
+      {% for category in collections.categories %}
+        <div class="category-card reveal">
+          <div class="icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <h3>{{ category }}</h3>
+        </div>
+      {% endfor %}
     </div>
-</aside>
+  </div>
+</section>
+{% endif %}
