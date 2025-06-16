@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: VOTRE_NOM_UTILISATEUR/nour-al-iman-blog
+  repo: prfect/nour-al-iman-blog
   branch: main
 
 media_folder: "images/uploads"
