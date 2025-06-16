@@ -1,0 +1,52 @@
+backend:
+  name: github
+  repo: VOTRE_NOM_UTILISATEUR/nour-al-iman-blog
+  branch: main
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+locale: 'fr'
+
+collections:
+  - name: "posts"
+    label: "Articles"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Date de publication", name: "date", widget: "datetime"}
+      - {label: "Catégorie", name: "category", widget: "select", options: ["القرآن الكريم", "الأحاديث النبوية", "الفقه الإسلامي", "قصص الصحابيات", "تربية الأبناء", "المرأة في الإسلام", "الصحة والعافية", "الطبخ المغربي"]}
+      - {label: "Image principale", name: "thumbnail", widget: "image"}
+      - {label: "Contenu", name: "body", widget: "markdown"}
+      - {label: "Auteur", name: "author", widget: "string"}
+      - {label: "Extrait", name: "excerpt", widget: "text", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
+
+  - name: "pages"
+    label: "Pages"
+    folder: "_pages"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - {label: "Titre", name: "title", widget: "string"}
+      - {label: "Contenu", name: "body", widget: "markdown"}
+      - {label: "Layout", name: "layout", widget: "hidden", default: "page.njk"}
+
+  - name: "settings"
+    label: "Paramètres"
+    files:
+      - label: "Paramètres du site"
+        name: "site"
+        file: "_data/settings.json"
+        fields:
+          - {label: "Titre du site", name: "siteTitle", widget: "string"}
+          - {label: "Description", name: "siteDescription", widget: "text"}
+          - {label: "Hadith du jour", name: "dailyHadith", widget: "object", fields: [
+              {label: "Texte", name: "text", widget: "text"},
+              {label: "Source", name: "source", widget: "string"}
+            ]}
+          - {label: "Liens sociaux", name: "socialLinks", widget: "list", fields: [
+              {label: "Plateforme", name: "platform", widget: "string"},
+              {label: "URL", name: "url", widget: "string"}
+            ]}
