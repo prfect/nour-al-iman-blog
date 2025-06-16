@@ -1,0 +1,46 @@
+# Répertoires de build
+_site/
+.cache/
+dist/
+build/
+public/
+
+# Dépendances
+node_modules/
+.eleventy.dev.js
+
+# Fichiers de l'environnement
+.env
+.env.*
+!.env.example
+
+# Fichiers du système
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Fichiers de débogage
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Fichiers d'éditeur
+.idea/
+.vscode/
+*.swp
+*.swo
+*.swn
+*.sublime-*
+*.code-workspace
+
+# Fichiers de sauvegarde
+*~
+*.bak
+*.tmp
+
+# Autres
+.netlify/
+.github/
+.vercel/
+.next/
