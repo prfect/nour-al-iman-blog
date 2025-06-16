@@ -26,7 +26,7 @@ Ce projet est un blog islamique moderne destiné aux femmes marocaines, construi
 
 1. Clonez ce dépôt :
    ```bash
-   git clone https://github.com/VOTRE_NOM_UTILISATEUR/nour-al-iman-blog.git
+   git clone https://github.com/prfect/nour-al-iman-blog.git
    cd nour-al-iman-blog
    ```
 
