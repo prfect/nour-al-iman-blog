@@ -1,0 +1,37 @@
+---
+layout: base.njk
+pagination:
+  data: collections.posts
+  size: 1
+  alias: post
+permalink: "articles/{{ post.fileSlug }}/"
+---
+
+<article class="article">
+  <div class="article-header">
+    <h1>{{ post.data.title }}</h1>
+    <div class="meta">
+      <span class="date">{{ post.date | formatDate }}</span>
+      <span class="author">{{ post.data.author }}</span>
+      <span class="category">{{ post.data.category }}</span>
+    </div>
+  </div>
+  
+  <div class="article-content">
+    {{ post.content | safe }}
+  </div>
+  
+  <div class="article-footer">
+    <div class="share">
+      <p>شارك المقال:</p>
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url }}" target="_blank">فيسبوك</a>
+      <a href="https://twitter.com/intent/tweet?url={{ page.url }}&text={{ post.data.title }}" target="_blank">تويتر</a>
+    </div>
+    
+    <div class="tags">
+      {% for tag in post.data.tags %}
+        <span class="tag">{{ tag }}</span>
+      {% endfor %}
+    </div>
+  </div>
+</article>
