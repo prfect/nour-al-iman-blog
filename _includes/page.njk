@@ -1,0 +1,60 @@
+---
+layout: base.njk
+---
+
+<div class="page-content">
+  <div class="page-header">
+    <h1 class="page-title">{{ title }}</h1>
+  </div>
+  
+  <div class="page-body">
+    {{ content | safe }}
+  </div>
+</div>
+
+<aside>
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">ابحث في المدونة</h3>
+    <form class="search-form" action="/search/" method="get">
+      <input type="text" placeholder="ابحث هنا..." name="q" class="search-input">
+      <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
+  
+  <div class="hijri-date-display">
+    <i class="fas fa-moon"></i> اليوم: <span class="hijri-date">15 ذو القعدة 1446 هـ</span>
+  </div>
+  
+  <div class="prayer-times-widget">
+    <h3 class="prayer-times-title"><i class="fas fa-mosque"></i> مواقيت الصلاة في وجدة</h3>
+    <div class="prayer-times">
+      <!-- Prayer times will be loaded by JavaScript -->
+    </div>
+  </div>
+  
+  <div class="sidebar-section">
+    <h3 class="sidebar-title">التصنيفات</h3>
+    <ul class="category-list">
+      {% for category, posts in collections.categoryPosts %}
+      <li><a href="/category/{{ category | slug }}/">{{ category }} ({{ posts.length }})</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  
+  <div class="daily-hadith">
+    <h3>حديث اليوم</h3>
+    <blockquote>
+      <p>"الكلمة الطيبة صدقة، وكل معروف صدقة"</p>
+      <cite>- صحيح البخاري</cite>
+    </blockquote>
+  </div>
+  
+  <div class="sidebar-section animate-fade-in">
+    <h3 class="sidebar-title">اشتركي في النشرة البريدية</h3>
+    <p style="margin-bottom: 1rem;">احصلي على آخر المقالات والتحديثات مباشرة على بريدك الإلكتروني</p>
+    <form class="newsletter-form" action="/subscribe/" method="post" netlify>
+      <input type="email" placeholder="أدخلي بريدك الإلكتروني" name="email" class="search-input" style="margin-bottom: 0.8rem;" required>
+      <button type="submit" class="read-more" style="width: 100%;">اشتراك <i class="fas fa-paper-plane"></i></button>
+    </form>
+  </div>
+</aside>
