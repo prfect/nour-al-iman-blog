@@ -38,13 +38,13 @@ permalink: "{{ post.url }}"
       
       <div class="article-share">
         <span>شاركي المقال:</span>
-        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | url | absoluteUrl(metadata.url) }}" target="_blank" class="share-button facebook">
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | url }}" target="_blank" class="share-button facebook">*
           <i class="fab fa-facebook-f"></i>
         </a>
-        <a href="https://twitter.com/intent/tweet?url={{ page.url | url | absoluteUrl(metadata.url) }}&text={{ post.data.title }}" target="_blank" class="share-button twitter">
+        <a href="https://twitter.com/intent/tweet?url={{ page.url | url }}&text={{ post.data.title }}" target="_blank" class="share-button twitter">
           <i class="fab fa-twitter"></i>
         </a>
-        <a href="https://api.whatsapp.com/send?text={{ post.data.title }} {{ page.url | url | absoluteUrl(metadata.url) }}" target="_blank" class="share-button whatsapp">
+        <a href="https://api.whatsapp.com/send?text={{ post.data.title }} {{ page.url | ur }}" target="_blank" class="share-button whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </div>
