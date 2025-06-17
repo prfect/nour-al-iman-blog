@@ -1,0 +1,50 @@
+---
+layout: base.njk
+title: جميع المقالات
+permalink: /articles/
+---
+
+<div class="page-header">
+  <div class="container">
+    <h1>{{ title }}</h1>
+  </div>
+</div>
+
+<div class="articles-archive">
+  <div class="container">
+    <div class="posts-grid">
+      {% for post in collections.posts | reverse %}
+        <div class="post-card">
+          {% if post.data.thumbnail %}
+          <div class="thumbnail">
+            <img src="{{ post.data.thumbnail }}" alt="{{ post.data.title }}">
+          </div>
+          {% endif %}
+          
+          <div class="content">
+            {% if post.data.category %}
+            <div class="category">{{ post.data.category }}</div>
+            {% endif %}
+            
+            <h3 class="title">
+              <a href="{{ post.url }}">{{ post.data.title }}</a>
+            </h3>
+            
+            {% if post.data.excerpt %}
+            <p class="excerpt">{{ post.data.excerpt }}</p>
+            {% endif %}
+            
+            <div class="meta">
+              <span class="date">{{ post.date | formatDate }}</span>
+              {% if post.data.author %}
+              <span class="author">{{ post.data.author }}</span>
+              {% endif %}
+            </div>
+            
+            <a href="{{ post.url }}" class="read-more">اقرأ المزيد →</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
