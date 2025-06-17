@@ -18,22 +18,20 @@ module.exports = function(eleventyConfig) {
     return array.slice(0, limit);
   });
   
-  // Related posts filter
-  eleventyConfig.addFilter("relatedByTags", function(collection, post) {
-    const postTags = post.data.tags || [];
-    
-    return collection.filter(item => {
-      // Don't include the current post
-      if (item.url === post.url) return false;
-      
-      // Check for tag overlap
-      const itemTags = item.data.tags || [];
-      return itemTags.some(tag => postTags.includes(tag));
+  // Filter pour filtrer les articles par catégorie
+  eleventyConfig.addFilter("filter", function(array, key, value) {
+    if (!array || !Array.isArray(array)) return [];
+    return array.filter(item => {
+      if (!item || !item.data) return false;
+      const keyPath = key.split('.');
+      let dataValue = item.data;
+      for (const k of keyPath) {
+        if (!dataValue || typeof dataValue !== 'object') return false;
+        dataValue = dataValue[k];
+      }
+      return dataValue === value;
     });
   });
-  
-  // Year shortcode
-  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
   
   // Collections
   eleventyConfig.addCollection("posts", function(collectionApi) {
@@ -41,9 +39,10 @@ module.exports = function(eleventyConfig) {
   });
   
   eleventyConfig.addCollection("categories", function(collectionApi) {
+    const posts = collectionApi.getFilteredByGlob("_posts/**/*.md");
     let categories = new Set();
     
-    collectionApi.getAll().forEach(item => {
+    posts.forEach(item => {
       if (item.data.category) {
         categories.add(item.data.category);
       }
@@ -52,23 +51,24 @@ module.exports = function(eleventyConfig) {
     return Array.from(categories);
   });
   
-  eleventyConfig.addCollection("tagList", function(collectionApi) {
-    let tagSet = new Set();
-    
-    collectionApi.getAll().forEach(item => {
-      if ("tags" in item.data) {
-        let tags = item.data.tags;
-        
-        if (Array.isArray(tags)) {
-          for (const tag of tags) {
-            tagSet.add(tag);
-          }
-        }
-      }
+  // Génération de l'index de recherche
+  eleventyConfig.addCollection("searchIndex", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("_posts/**/*.md").map(item => {
+      return {
+        url: item.url,
+        title: item.data.title || "",
+        excerpt: item.data.excerpt || "",
+        content: (item.templateContent || "").replace(/<[^>]*>/g, '').slice(0, 5000),
+        date: item.data.date ? new Date(item.data.date).toLocaleDateString('ar-MA') : "",
+        thumbnail: item.data.thumbnail || "",
+        category: item.data.category || "",
+        author: item.data.author || ""
+      };
     });
-    
-    return Array.from(tagSet).sort();
   });
+  
+  // Year shortcode
+  eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`);
   
   return {
     dir: {
