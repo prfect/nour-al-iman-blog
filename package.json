@@ -1,27 +1,13 @@
 {
-  "name": "nour-al-iman-blog",
+  "name": "nour-al-iman",
   "version": "1.0.0",
-  "description": "Blog islamique moderne pour femmes marocaines",
+  "description": "Site islamique en arabe",
   "main": "index.js",
   "scripts": {
     "build": "eleventy",
-    "start": "eleventy --serve",
-    "debug": "DEBUG=* eleventy"
-  },
-  "keywords": [
-    "islam",
-    "blog",
-    "morocco",
-    "arabic",
-    "eleventy"
-  ],
-  "author": "Votre Nom",
-  "license": "MIT",
-  "devDependencies": {
-    "@11ty/eleventy": "^2.0.1"
+    "serve": "eleventy --serve"
   },
   "dependencies": {
-    "luxon": "^3.4.3",
-    "markdown-it": "^13.0.1"
+    "@11ty/eleventy": "^2.0.1"
   }
 }
