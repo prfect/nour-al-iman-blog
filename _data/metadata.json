@@ -1,7 +1,15 @@
 {
   "title": "نور الإيمان",
   "url": "https://nour-al-iman.netlify.app",
-  "description": "Blog islamique moderne pour femmes marocaines",
+  "description": "منصة إسلامية تهدف إلى نشر المعرفة والقيم الإسلامية في عالم متغير",
+  "author": "فريق نور الإيمان",
+  "email": "info@nour-aliman.com",
+  "social": {
+    "facebook": "#",
+    "twitter": "#",
+    "instagram": "#",
+    "youtube": "#"
+  },
   "dailyHadith": {
     "text": "قال رسول الله صلى الله عليه وسلم: \"من سلك طريقاً يلتمس فيه علماً سهل الله له به طريقاً إلى الجنة\"",
     "source": "رواه مسلم"
